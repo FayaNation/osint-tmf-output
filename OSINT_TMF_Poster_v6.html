@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OSINT Threat Modelling Framework — Poster</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:  #0B2545;
+  --blue:  #1565C0;
+  --cyan:  #0288D1;
+  --teal:  #00ACC1;
+  --light: #E3F2FD;
+  --pale:  #F0F7FF;
+  --white: #FFFFFF;
+  --grey:  #546E7A;
+  --body:  #263238;
+  --accent:#FF6F00;
+  --green: #2E7D32;
+  --red:   #C62828;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'DM Sans',sans-serif; background:#f0f0f0; display:flex; justify-content:center; padding:20px; }
+.poster { width:794px; background:var(--white); box-shadow:0 8px 40px rgba(0,0,0,0.18); }
+
+/* HEADER */
+.header { background:var(--navy); padding:24px 30px 18px; position:relative; overflow:hidden; }
+.header::before { content:''; position:absolute; top:-60px; right:-60px; width:240px; height:240px;
+  background:radial-gradient(circle,rgba(2,136,209,0.3) 0%,transparent 70%); border-radius:50%; }
+.header-top { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+.biust-badge { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.22);
+  color:rgba(255,255,255,0.85); font-size:8.5px; font-weight:600; letter-spacing:1.4px;
+  text-transform:uppercase; padding:4px 9px; border-radius:4px; }
+.comp-badge { color:rgba(255,255,255,0.5); font-size:8.5px; font-weight:500;
+  letter-spacing:0.8px; text-transform:uppercase; text-align:right; line-height:1.6; }
+.header-title { font-family:'Syne',sans-serif; font-size:36px; font-weight:800; color:var(--white);
+  line-height:1.1; letter-spacing:-0.5px; margin-bottom:5px; }
+.header-title span { color:var(--teal); }
+.header-sub { font-size:10.5px; color:rgba(255,255,255,0.6); margin-bottom:12px; }
+.header-meta { display:flex; gap:22px; padding-top:10px; border-top:1px solid rgba(255,255,255,0.1); }
+.ml { display:flex; flex-direction:column; gap:2px; }
+.ml-lbl { font-size:7.5px; font-weight:700; letter-spacing:1.2px; text-transform:uppercase; color:var(--teal); }
+.ml-val { font-size:9.5px; color:rgba(255,255,255,0.9); font-weight:500; }
+
+.strip { height:4px; background:linear-gradient(90deg,var(--cyan),var(--teal),var(--blue)); }
+
+/* LAYOUT */
+.row { display:grid; border-bottom:1px solid #EEF2F7; }
+.r2 { grid-template-columns:1fr 1fr; }
+.block { padding:15px 17px; border-right:1px solid #EEF2F7; }
+.block:last-child { border-right:none; }
+.full { grid-column:1/-1; border-right:none; }
+.bg-pale { background:#F0F7FF; }
+.bg-light { background:#FAFCFF; }
+
+/* LABELS */
+.lbl { display:inline-flex; align-items:center; gap:5px; color:var(--white);
+  font-size:7.5px; font-weight:700; letter-spacing:1.3px; text-transform:uppercase;
+  padding:3px 9px; border-radius:3px; margin-bottom:8px; }
+.lbl.navy  { background:var(--navy); }
+.lbl.blue  { background:var(--blue); }
+.lbl.cyan  { background:var(--cyan); }
+.lbl.teal  { background:var(--teal); }
+.lbl.green { background:var(--green); }
+.lbl.orange{ background:var(--accent); }
+.lbl.red   { background:var(--red); }
+
+.block h3 { font-family:'Syne',sans-serif; font-size:13px; font-weight:700;
+  color:var(--navy); margin-bottom:5px; line-height:1.25; }
+.block p { font-size:8.8px; color:var(--body); line-height:1.62; }
+
+/* PIPELINE */
+.pipeline { display:flex; align-items:flex-start; background:var(--pale);
+  border:1px solid #DDEEFF; border-radius:6px; padding:9px 6px; margin:9px 0 11px; }
+.pstep { display:flex; flex-direction:column; align-items:center; flex:1; gap:4px; }
+.pnum { width:28px; height:28px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-family:'Syne',sans-serif; font-size:13px; font-weight:800;
+  color:white; flex-shrink:0; }
+.p1{background:#0288D1;} .p2{background:#00ACC1;} .p3{background:#1565C0;}
+.p4{background:#7B1FA2;} .p5{background:#2E7D32;}
+.pname { font-size:7px; font-weight:700; color:var(--navy); text-align:center; line-height:1.2; }
+.parr { font-size:15px; color:var(--teal); flex-shrink:0; padding-bottom:12px; margin:0 1px; }
+
+/* MODULES */
+.mod { display:flex; gap:7px; margin-bottom:6px; align-items:flex-start; }
+.mod-num { width:17px; height:17px; border-radius:50%; display:flex; align-items:center;
+  justify-content:center; font-size:7.5px; font-weight:700; color:white; flex-shrink:0; margin-top:1px; }
+.mod-text h4 { font-size:8.5px; font-weight:700; color:var(--navy); margin-bottom:1px; }
+.mod-text p { font-size:7.5px; color:var(--grey); line-height:1.38; }
+
+/* FEATURES */
+.feat-grid { display:grid; grid-template-columns:1fr 1fr; gap:5px; margin-top:7px; }
+.feat { background:white; border:1px solid #DDEEFF; border-radius:5px;
+  padding:6px 8px; display:flex; gap:6px; align-items:flex-start; }
+.feat-ico { font-size:14px; flex-shrink:0; margin-top:1px; }
+.feat h4 { font-size:7.8px; font-weight:700; color:var(--navy); margin-bottom:1px; }
+.feat p { font-size:7.2px; color:var(--grey); line-height:1.32; }
+
+/* TECH */
+.tech-row { display:flex; flex-wrap:wrap; gap:5px; margin-top:7px; }
+.chip { display:flex; align-items:center; gap:4px; background:var(--pale);
+  border:1px solid #DDEEFF; border-radius:20px; padding:3px 8px 3px 5px;
+  font-size:7.5px; font-weight:600; color:var(--navy); }
+.dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+.chip.plan { border-style:dashed; background:white; color:var(--grey); }
+
+/* METHODOLOGY TAGS */
+.tag-row { display:flex; flex-wrap:wrap; gap:4px; margin-top:7px; }
+.tag { background:var(--light); border-radius:4px; padding:2px 7px;
+  font-size:7.2px; font-weight:600; color:var(--blue); }
+
+/* DIFF TABLE */
+.dtbl { width:100%; border-collapse:collapse; margin-top:7px; font-size:7.8px; }
+.dtbl th { background:var(--navy); color:white; padding:5px 7px; text-align:left;
+  font-size:7.5px; font-weight:600; letter-spacing:0.4px; }
+.dtbl td { padding:4px 7px; border-bottom:1px solid #EEF2F7; color:var(--body); vertical-align:middle; }
+.dtbl tr:nth-child(even) td { background:#FAFCFF; }
+.tick { color:var(--green); font-weight:700; font-size:10px; }
+.cross { color:var(--red); font-size:10px; }
+
+/* QR PAIR */
+.qr-pair { display:flex; gap:12px; margin-top:12px; }
+.qr-card { flex:1; display:flex; align-items:center; gap:9px;
+  background:var(--pale); border:1px solid #DDEEFF; border-radius:6px; padding:9px 10px; }
+.qr-img { border-radius:4px; flex-shrink:0; }
+.qr-info h4 { font-size:8.5px; font-weight:700; color:var(--navy); margin-bottom:2px; }
+.qr-info p { font-size:7.5px; color:var(--grey); line-height:1.38; }
+
+/* FOOTER */
+.footer { background:var(--navy); padding:11px 24px;
+  display:flex; justify-content:space-between; align-items:center; gap:16px; }
+.footer-name { font-family:'Syne',sans-serif; font-size:11px; font-weight:700; color:white; }
+.footer-detail { font-size:7.8px; color:rgba(255,255,255,0.5); margin-top:2px; }
+
+@media print { body{background:white;padding:0;} .poster{box-shadow:none;width:100%;} }
+</style>
+</head>
+<body>
+<div class="poster">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-top">
+    <div class="biust-badge">BIUST · COMP401 · Final Year Project</div>
+    <div class="comp-badge">Department of Computing &amp; Informatics<br>Computer Science &amp; Software Engineering</div>
+  </div>
+  <div class="header-title">OSINT <span>Threat Modelling</span> Framework</div>
+  <div class="header-sub">An automated pipeline that collects open-source intelligence, analyses exposure risks, and simulates realistic cyberattack scenarios</div>
+  <div class="header-meta">
+    <div class="ml"><div class="ml-lbl">Student</div><div class="ml-val">Loago Sebetlela · 22000479</div></div>
+    <div class="ml"><div class="ml-lbl">Supervisor</div><div class="ml-val">Dr. Oteng Tabona</div></div>
+    <div class="ml"><div class="ml-lbl">Language</div><div class="ml-val">Python 3</div></div>
+    <div class="ml"><div class="ml-lbl">Framework</div><div class="ml-val">Modular Pipeline · MITRE ATT&amp;CK</div></div>
+  </div>
+</div>
+<div class="strip"></div>
+
+<!-- ROW 1: INTRO + PROBLEM -->
+<div class="row" style="grid-template-columns:1fr">
+  <div class="block full bg-pale">
+    <div class="lbl navy">Introduction &amp; Problem Statement</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+      <div>
+        <h3 style="margin-bottom:5px">Background</h3>
+        <p>Open Source Intelligence (OSINT) is the collection and analysis of publicly available information to support security operations. In cybersecurity, OSINT represents the <strong>reconnaissance phase</strong> of an attack — where adversaries gather intelligence before exploiting any vulnerability. Organisations unknowingly expose sensitive data through their websites, metadata, JavaScript endpoints, and subdomains.</p>
+      </div>
+      <div style="border-left:3px solid var(--blue);padding-left:14px">
+        <h3 style="margin-bottom:5px">The Problem</h3>
+        <p>Public information is often collected without permission by attackers, but plenty of companies still don't use hands-on tools that show how OSINT threats work or why they are dangerous. Existing tools such as Maltego and SpiderFoot collect data well — but <strong>none simulate how that data translates into real attack paths</strong>.</p>
+        <p style="margin-top:5px">This project addresses that gap by developing a platform that collects, analyses, and simulates real-world attack scenarios based on open data sources — <strong>bridging the gap between OSINT awareness and defensive security education</strong>.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ROW 2: PROPOSED SOLUTION + FEATURES / TECH / METHODOLOGY / COMPARISON / QR -->
+<div class="row r2">
+
+  <!-- LEFT: PROPOSED SOLUTION -->
+  <div class="block">
+    <div class="lbl cyan">Proposed Solution</div>
+    <h3>A Five-Module Automated Framework</h3>
+    <p>The solution is a five-module Python framework. A user provides a target URL and the entire pipeline runs automatically — from data collection through to a full threat report with MITRE-mapped attack scenarios.</p>
+
+    <div class="pipeline">
+      <div class="pstep"><div class="pnum p1">1</div><div class="pname">Extract<br>OSINT Data</div></div>
+      <div class="parr">›</div>
+      <div class="pstep"><div class="pnum p2">2</div><div class="pname">Enrich<br>via APIs</div></div>
+      <div class="parr">›</div>
+      <div class="pstep"><div class="pnum p3">3</div><div class="pname">Analyse &amp;<br>Score Risks</div></div>
+      <div class="parr">›</div>
+      <div class="pstep"><div class="pnum p4">4</div><div class="pname">Simulate<br>Attacks</div></div>
+      <div class="parr">›</div>
+      <div class="pstep"><div class="pnum p5">5</div><div class="pname">Generate<br>Report</div></div>
+    </div>
+
+    <div class="mod"><div class="mod-num p1">1</div><div class="mod-text"><h4>Crawler Module</h4><p>Passively fetches public pages and extracts emails, links, metadata, JavaScript endpoints, and subdomains. Respects robots.txt and applies rate limiting.</p></div></div>
+    <div class="mod"><div class="mod-num p2">2</div><div class="mod-text"><h4>Enrichment Module</h4><p>Structures raw data and enriches findings via Shodan (infrastructure intelligence) and HaveIBeenPwned (breach history) APIs.</p></div></div>
+    <div class="mod"><div class="mod-num p3">3</div><div class="mod-text"><h4>Analyzer Module</h4><p>Classifies each finding by type, assigns OWASP-inspired risk weights, detects PII using regex patterns, and computes a total risk score.</p></div></div>
+    <div class="mod"><div class="mod-num p4">4</div><div class="mod-text"><h4>Simulator Module</h4><p>Maps findings to MITRE ATT&amp;CK tactics and generates evidence-based attack scenarios and multi-stage attack chains.</p></div></div>
+    <div class="mod"><div class="mod-num p5">5</div><div class="mod-text"><h4>Reporter Module</h4><p>Compiles findings into HTML, Markdown, and plain text reports with remediation recommendations.</p></div></div>
+
+    <!-- TO UPDATE: replace QR src with base64 of your real GitHub Pages QR after uploading -->
+    <div style="display:flex;align-items:center;gap:10px;margin-top:12px;
+                background:var(--pale);border:1px solid #DDEEFF;border-radius:6px;padding:9px 11px">
+      <img src="data:image/png;base64,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"
+           style="width:58px;height:58px;border-radius:4px;flex-shrink:0" alt="Live Report QR"/>
+      <div>
+        <div style="font-size:8.5px;font-weight:700;color:var(--navy);margin-bottom:2px">📄 View Live Report Output</div>
+        <div style="font-size:7.5px;color:var(--grey);line-height:1.4">Scan to view the full system output report — collected OSINT data, risk scores, and MITRE ATT&amp;CK mapped attack scenarios.</div>
+        <div style="font-size:7px;color:var(--blue);margin-top:3px;font-style:italic">your-username.github.io/osint-tmf/final_report.html</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: FEATURES + TECH + METHODOLOGY + COMPARISON + QR -->
+  <div class="block bg-light">
+    <div class="lbl blue">Key Features</div>
+    <div class="feat-grid">
+      <div class="feat"><div class="feat-ico">🕷️</div><div><h4>Passive Web Crawling</h4><p>Collects OSINT without triggering defences — respects robots.txt</p></div></div>
+      <div class="feat"><div class="feat-ico">⚖️</div><div><h4>OWASP Risk Scoring</h4><p>Weighted scoring grounded in OWASP Risk Rating Methodology</p></div></div>
+      <div class="feat"><div class="feat-ico">🗺️</div><div><h4>MITRE ATT&amp;CK Mapping</h4><p>Scenarios linked to real tactic IDs — TA0043, TA0001, TA0002</p></div></div>
+      <div class="feat"><div class="feat-ico">🔗</div><div><h4>Attack Chain Simulation</h4><p>Multi-stage sequences showing how leaks escalate to compromise</p></div></div>
+      <div class="feat"><div class="feat-ico">🔍</div><div><h4>PII Detection</h4><p>Regex patterns detect passport numbers, national IDs, phones</p></div></div>
+      <div class="feat"><div class="feat-ico">📋</div><div><h4>Multi-Format Reports</h4><p>HTML, Markdown, and plain text with remediation advice</p></div></div>
+    </div>
+
+    <!-- TECH -->
+    <div style="margin-top:11px">
+      <div class="lbl teal">Technologies Used</div>
+      <div class="tech-row">
+        <div class="chip"><div class="dot" style="background:#3776AB"></div>Python 3</div>
+        <div class="chip"><div class="dot" style="background:#4B8BBE"></div>BeautifulSoup4</div>
+        <div class="chip"><div class="dot" style="background:#E8C84A"></div>Requests</div>
+        <div class="chip"><div class="dot" style="background:#764ABC"></div>Regex</div>
+        <div class="chip"><div class="dot" style="background:#3EB489"></div>JSON</div>
+        <div class="chip"><div class="dot" style="background:#F05133"></div>Git</div>
+        <div class="chip plan"><div class="dot" style="background:#AA1E1E"></div>Shodan API</div>
+        <div class="chip plan"><div class="dot" style="background:#1B9E4E"></div>HaveIBeenPwned API</div>
+      </div>
+      <p style="font-size:6.8px;color:var(--grey);margin-top:3px;font-style:italic">Dashed = coded, pending live API keys</p>
+    </div>
+
+    <!-- METHODOLOGY -->
+    <div style="margin-top:10px">
+      <div class="lbl orange">Development Methodology</div>
+      <div class="tag-row">
+        <div class="tag">🔄 Agile — 16 weeks</div>
+        <div class="tag">🧩 Modular Architecture</div>
+        <div class="tag">🔒 Passive Collection Only</div>
+        <div class="tag">🤖 Fully Automated Pipeline</div>
+        <div class="tag">✅ Ethical — Dummy Domains Only</div>
+      </div>
+    </div>
+
+    <!-- COMPARISON -->
+    <div style="margin-top:10px">
+      <div class="lbl navy">How It Compares</div>
+      <table class="dtbl">
+        <tr>
+          <th>Capability</th>
+          <th style="text-align:center">Maltego</th>
+          <th style="text-align:center">SpiderFoot</th>
+          <th style="text-align:center;background:var(--blue)">This System</th>
+        </tr>
+        <tr><td>OSINT Collection</td><td style="text-align:center"><span class="tick">✓</span></td><td style="text-align:center"><span class="tick">✓</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+        <tr><td>Risk Scoring</td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+        <tr><td>Attack Simulation</td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+        <tr><td>MITRE ATT&amp;CK Mapping</td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+        <tr><td>Attack Chains</td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+        <tr><td>Open Source / Free</td><td style="text-align:center"><span class="cross">✗</span></td><td style="text-align:center"><span class="tick">✓</span></td><td style="text-align:center"><span class="tick">✓</span></td></tr>
+      </table>
+    </div>
+
+    >
