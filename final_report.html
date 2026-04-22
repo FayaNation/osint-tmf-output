@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>OSINT Attack Simulation Report</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        line-height: 1.6;
+        color: #222;
+    }
+    h1, h2, h3 {
+        color: #2c3e50;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    .section {
+        margin-bottom: 40px;
+    }
+    .note {
+        font-style: italic;
+        color: #555;
+    }
+    .mitre-list {
+        margin-top: 6px;
+    }
+    .mitre-list li {
+        font-size: 0.9em;
+        color: #333;
+    }
+    .mitre-list a {
+        color: #c0392b;
+        text-decoration: none;
+        font-weight: bold;
+    }
+    .mitre-list a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<h1>OSINT Attack Simulation Report</h1>
+<p><strong>Target:</strong> https://books.toscrape.com</p>
+<p><strong>Generated on:</strong> 2026-04-22 15:23:50.119564</p>
+
+<div class="section">
+<h2>1. Collected OSINT Summary</h2>
+<table>
+<tr><th>Data Type</th><th>Count</th></tr>
+<tr><td>Emails</td><td>0</td></tr>
+<tr><td>Links</td><td>73</td></tr>
+<tr><td>Metadata</td><td>3</td></tr>
+<tr><td>Scripts</td><td>5</td></tr>
+<tr><td>Subdomains</td><td>0</td></tr>
+</table>
+</div>
+
+<div class="section">
+<h2>2. Risk Analysis</h2>
+<p><strong>Total Risk Score:</strong> 16</p>
+<table>
+<tr>
+<th>Finding Type</th>
+<th>Sensitivity</th>
+<th>Score</th>
+<th>Value</th>
+</tr>
+
+<tr>
+<td>javascript_endpoint</td>
+<td>High</td>
+<td>3</td>
+<td>https://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js</td>
+</tr>
+
+<tr>
+<td>javascript_endpoint</td>
+<td>High</td>
+<td>3</td>
+<td>http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js</td>
+</tr>
+
+<tr>
+<td>javascript_endpoint</td>
+<td>High</td>
+<td>3</td>
+<td>https://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js</td>
+</tr>
+
+<tr>
+<td>javascript_endpoint</td>
+<td>High</td>
+<td>3</td>
+<td>https://books.toscrape.com/static/oscar/js/oscar/ui.js</td>
+</tr>
+
+<tr>
+<td>javascript_endpoint</td>
+<td>High</td>
+<td>3</td>
+<td>https://books.toscrape.com/static/oscar/js/bootstrap3/bootstrap.min.js</td>
+</tr>
+
+<tr>
+<td>metadata_leak</td>
+<td>Low</td>
+<td>1</td>
+<td>{&#x27;created&#x27;: &#x27;24th Jun 2016 09:29&#x27;, &#x27;viewport&#x27;: &#x27;width=device-width&#x27;, &#x27;robots&#x27;: &#x27;NOARCHIVE,NOCACHE&#x27;}</td>
+</tr>
+
+</table>
+</div>
+
+<div class="section">
+<h2>3. Network Exposure (Shodan)</h2>
+<p>No Shodan data available.</p>
+</div>
+
+<div class="section">
+<h2>4. Simulated Attack Scenarios</h2>
+
+<h3>Endpoint Enumeration &amp; Brute Force</h3>
+<ul>
+<li><strong>Trigger:</strong> javascript_endpoint</li>
+<li><strong>Affected (5):</strong><ul><li><code>https://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/bootstrap-datetimepicker.js</code></li><li><code>http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js</code></li><li><code>https://books.toscrape.com/static/oscar/js/bootstrap-datetimepicker/locales/bootstrap-datetimepicker.all.js</code></li><li><code>https://books.toscrape.com/static/oscar/js/oscar/ui.js</code></li><li><code>https://books.toscrape.com/static/oscar/js/bootstrap3/bootstrap.min.js</code></li></ul></li>
+<li><strong>Description:</strong> 5 JavaScript endpoint(s) were discovered. An attacker can enumerate these to map the application&#x27;s API surface and target hidden or unauthenticated routes.</li>
+<li><strong>Risk:</strong> Unauthorized access, API abuse, or information disclosure</li>
+<li><strong>Recommendation:</strong> Restrict access to sensitive endpoints, enforce authentication, rate-limit requests, and monitor for enumeration patterns.</li>
+</ul>
+<p><strong>MITRE ATT&amp;CK Techniques:</strong></p><ul class="mitre-list"><li><a href="https://attack.mitre.org/techniques/T1592/002/" target="_blank">T1592.002</a> — Gather Victim Host Information: Software | <em>Reconnaissance</em> (<code>TA0043</code>)</li><li><a href="https://attack.mitre.org/techniques/T1595/002/" target="_blank">T1595.002</a> — Active Scanning: Vulnerability Scanning | <em>Reconnaissance</em> (<code>TA0043</code>)</li><li><a href="https://attack.mitre.org/techniques/T1083/" target="_blank">T1083</a> — File and Directory Discovery | <em>Discovery</em> (<code>TA0007</code>)</li></ul>
+<h3>Fingerprinting</h3>
+<ul>
+<li><strong>Trigger:</strong> metadata_leak</li>
+
+<li><strong>Description:</strong> Exposed metadata reveals information about the technology stack that can be used to identify known vulnerabilities.</li>
+<li><strong>Risk:</strong> Targeted exploitation</li>
+<li><strong>Recommendation:</strong> Remove metadata leaks and keep software components updated.</li>
+</ul>
+<p><strong>MITRE ATT&amp;CK Techniques:</strong></p><ul class="mitre-list"><li><a href="https://attack.mitre.org/techniques/T1592/002/" target="_blank">T1592.002</a> — Gather Victim Host Information: Software | <em>Reconnaissance</em> (<code>TA0043</code>)</li><li><a href="https://attack.mitre.org/techniques/T1595/002/" target="_blank">T1595.002</a> — Active Scanning: Vulnerability Scanning | <em>Reconnaissance</em> (<code>TA0043</code>)</li><li><a href="https://attack.mitre.org/techniques/T1190/" target="_blank">T1190</a> — Exploit Public-Facing Application | <em>Initial Access</em> (<code>TA0001</code>)</li></ul>
+</div>
+
+<div class="section">
+<h2>5. Attack Chains</h2>
+<p>No attack chains identified.</p>
+</div>
+
+<div class="section">
+<h2>6. Summary and Defensive Guidance</h2>
+<p class="note">
+This report demonstrates how publicly available information can be combined to infer
+potential attack paths. All attack scenarios are simulated for educational and defensive
+awareness purposes only. No real exploitation was performed.
+</p>
+</div>
+
+</body>
+</html>
